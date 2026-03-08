@@ -8,7 +8,7 @@ create table Faculty_Yearly_Details(
   Full_Time boolean,
   First_Year_Only boolean,
 
-  foreign key(Year_ID) references AcademicYear(Year_ID)
+  foreign key(Year_ID) references Academic_Year(Year_ID)
     on update cascade
     on delete cascade,
 
@@ -18,4 +18,4 @@ create table Faculty_Yearly_Details(
   foreign key(Faculty_ID) references Faculty_Details(Faculty_ID)
     on update cascade
     on delete cascade
-)
+);
