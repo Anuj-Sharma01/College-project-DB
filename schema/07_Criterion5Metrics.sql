@@ -14,6 +14,4 @@ create table Criterion5Metrics(
   foreign key(Year_ID) references Academic_Year(Year_ID)
     on update cascade
     on delete cascade
-)
-  
-  
+);
