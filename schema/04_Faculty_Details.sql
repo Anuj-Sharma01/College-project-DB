@@ -5,4 +5,4 @@ create table Faculty_Details(
   Highest_Degree varchar(20) not null,
   Specialization varchar(20),
   Date_of_Joining date
-)
+);
