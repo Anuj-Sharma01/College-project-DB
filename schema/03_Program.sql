@@ -7,4 +7,4 @@ create table Program(
   Foreign Key(Dept_ID) References Department(Dept_ID)
     on delete cascade
     on update cascade
-)
+);
