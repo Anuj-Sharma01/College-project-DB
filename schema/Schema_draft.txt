@@ -1,0 +1,102 @@
+//On Review - 14 March 2026
+
+create table Department(Dept_ID int auto_increment primary key, Dept_Name unique varchar(50) not null, is_Allied Boolean default false);
+
+create table Academic_Year(Year_ID int auto_increment primary key, Year_Code varchar(10) not null unique , Academic_Session varchar(10));
+//add a year start date and year end date manually enter start date and automatically calculate end 
+
+
+create table Program(
+  Program_ID int primary key,
+  Program_Name varchar(50) not null,
+  Sanctioned_Intake int,
+  Program_Duration int not null,
+  Dept_ID int,
+	
+CHECK (Sanctioned_Intake > 0),
+  Foreign Key(Dept_ID) References Department(Dept_ID)
+    on delete cascade
+    on update cascade
+);
+
+
+create table Faculty_Details(
+  Faculty_ID int primary key,
+  Faculty_Name varchar(50) not null,
+  Pan_no char(10) unique not null,
+  Highest_Degree varchar(20) not null,
+  Specialization varchar(50),
+  Date_of_Joining date not null,
+
+CHECK (PAN_No REGEXP '^[A-Z]{5}[0-9]{4}[A-Z]{1}$')
+);
+
+
+create table Program_Intake(
+  Intake_ID int auto_increment primary key,
+  Program_ID int not null,
+  Year_ID int not null,
+  Lateral_Students  int,
+
+  foreign key(Program_ID) references Program(Program_ID)
+    on update cascade
+    on delete cascade,
+
+  foreign key(Year_ID) references Academic_Year(Year_ID)
+    on update cascade
+    on delete cascade
+);
+
+create table Faculty_Yearly_Details(
+  FY_ID int AUTO_INCREMENT primary key,
+  Year_ID int not null,
+  Dept_ID int not null,
+  Faculty_ID int not null ,
+  Designation ENUM(
+        'Professor',
+        'Associate Professor',
+        'Assistant Professor',
+        'Lecturer'
+    ) NOT NULL,
+  Nature_of_Association varchar(30),
+///Nature_of_Association ENUM(
+        'Permanent',
+        'Contract',
+        'Adjunct',
+        'Visiting',
+        'Temporary'
+    ) NOT NULL,
+////
+  Full_Time boolean ,
+  First_Year_Only boolean,
+/////////First_Year_Only BOOLEAN DEFAULT FALSE,(to be revived)
+  foreign key(Year_ID) references Academic_Year(Year_ID)
+    on update cascade
+    on delete cascade,
+
+  foreign key(Dept_ID) references Department(Dept_ID)
+    on update cascade
+    on delete cascade,
+  foreign key(Faculty_ID) references Faculty_Details(Faculty_ID)
+    on update cascade
+    on delete cascade
+);
+
+///recalclaute sfr on frontend each time 
+
+create table Criterion5Metrics(
+  Metric_ID int AUTO_INCREMENT primary key,
+  Total_Students int,
+  Effective_Faculty int,
+  FQI DECIMAL(5,2) ,
+  Program_ID int not null,
+  Year_ID int not null,
+
+  foreign key(Program_ID) references Program(Program_ID)
+    on update cascade
+    on delete cascade,
+
+  foreign key(Year_ID) references Academic_Year(Year_ID)
+    on update cascade
+    on delete cascade
+);
