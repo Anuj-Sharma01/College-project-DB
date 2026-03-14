@@ -1,6 +1,6 @@
 //On Review - 14 March 2026
 
-create table Department(Dept_ID int auto_increment primary key, Dept_Name unique varchar(50) not null, is_Allied Boolean default false);
+create table Department(Dept_ID int auto_increment primary key, Dept_Name varchar(50) not null, is_Allied Boolean default false);
 
 create table Academic_Year(Year_ID int auto_increment primary key, Year_Code varchar(10) not null unique , Academic_Session varchar(10));
 //add a year start date and year end date manually enter start date and automatically calculate end 
