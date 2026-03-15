@@ -1,9 +1,14 @@
 create table Faculty_Yearly_Details(
   FY_ID int AUTO_INCREMENT primary key,
-  Year_ID int,
-  Dept_ID int,
-  Faculty_ID int,
-  Designation varchar(20),
+  Year_ID int not null,
+  Dept_ID int not null,
+  Faculty_ID int not null,
+  Designation ENUM(
+    'Professor',
+    'Associate Professor',
+    'Assistant Professor',
+    'Lecturer'
+  ) not null,
   Nature_of_Association varchar(30),
   Full_Time boolean,
   First_Year_Only boolean,
