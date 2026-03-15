@@ -2,10 +2,9 @@ create table Criterion5Metrics(
   Metric_ID int AUTO_INCREMENT primary key,
   Total_Students int,
   Effective_Faculty int,
-  SFR DECIMAL(5,2),
   FQI DECIMAL(5,2),
-  Program_ID int,
-  Year_ID int,
+  Program_ID int not null,
+  Year_ID int not null,
 
   foreign key(Program_ID) references Program(Program_ID)
     on update cascade
