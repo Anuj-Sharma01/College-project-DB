@@ -1,1 +1,8 @@
-create table Academic_Year(Year_ID int primary key, Year_Code varchar(20) not null, Academic_Session varchar(10));
+CREATE TABLE Academic_Year (
+  Year_ID INT PRIMARY KEY,
+  Year_Code VARCHAR(20) NOT NULL,
+  Academic_Session VARCHAR(10),
+  Start_Date DATE,
+  End_Date DATE GENERATED ALWAYS AS 
+      (DATE_ADD(Start_Date, INTERVAL 364 DAY)) STORED
+);
